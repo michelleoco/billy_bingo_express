@@ -1,0 +1,25 @@
+{
+  "name": "billy_bingo_express",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michelleoco/billy_bingo_express.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michelleoco/billy_bingo_express/issues"
+  },
+  "homepage": "https://github.com/michelleoco/billy_bingo_express#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
