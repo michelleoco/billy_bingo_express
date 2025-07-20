@@ -73,12 +73,33 @@ userSchema.statics.findByEmailWithPassword = function (email) {
 // Static method to create a new user with validation
 userSchema.statics.createUser = async function (userData) {
   try {
+    // Check for existing email
+    const existingEmail = await this.findOne({ email: userData.email });
+    if (existingEmail) {
+      const duplicateError = new Error("Email already exists");
+      duplicateError.statusCode = 409;
+      duplicateError.name = "ConflictError";
+      throw duplicateError;
+    }
+
+    // Check for existing username
+    const existingUsername = await this.findOne({ name: userData.name });
+    if (existingUsername) {
+      const duplicateError = new Error("Username already exists");
+      duplicateError.statusCode = 409;
+      duplicateError.name = "ConflictError";
+      throw duplicateError;
+    }
+
     const user = new this(userData);
     return await user.save();
   } catch (error) {
-    // Handle duplicate email error
+    // Handle mongoose duplicate key error as fallback
     if (error.code === 11000) {
-      const duplicateError = new Error("Email already exists");
+      const field = Object.keys(error.keyPattern)[0];
+      const duplicateError = new Error(
+        field === "email" ? "Email already exists" : "Username already exists"
+      );
       duplicateError.statusCode = 409;
       duplicateError.name = "ConflictError";
       throw duplicateError;

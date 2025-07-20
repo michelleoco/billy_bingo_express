@@ -15,10 +15,10 @@ const isValidPassword = (password) => {
   return hasLetter && hasNumber;
 };
 
-// Name validation (at least 2 characters, only letters and spaces)
+// Name validation (at least 2 characters, only letters and numbers)
 const isValidName = (name) => {
   if (name.length < 2) return false;
-  const nameRegex = /^[a-zA-Z\s]+$/;
+  const nameRegex = /^[a-zA-Z0-9]+$/;
   return nameRegex.test(name);
 };
 
@@ -37,7 +37,7 @@ const validateUserRegistration = (userData) => {
     errors.push("Name is required");
   } else if (!isValidName(userData.name)) {
     errors.push(
-      "Name must be at least 2 characters and contain only letters and spaces"
+      "Name must be at least 2 characters and contain only letters and numbers"
     );
   }
 
@@ -67,7 +67,7 @@ const validateUserUpdate = (userData) => {
 
   if (userData.name !== undefined && !isValidName(userData.name)) {
     errors.push(
-      "Name must be at least 2 characters and contain only letters and spaces"
+      "Name must be at least 2 characters and contain only letters and numbers"
     );
   }
 
