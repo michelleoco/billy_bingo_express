@@ -25,7 +25,6 @@ This back-end repository contains the **Express.js API** that supports the app b
 - Enable user authentication and authorization for personalized profiles.
 - Manage CRUD operations for BINGO cards and song selections.
 - Integrate with external APIs to fetch historical setlist data for song recommendations.
-- Provide real-time support for live game tracking and BINGO notifications.
 - Ensure robust input validation, error handling, and secure password management.
 
 ---
@@ -49,17 +48,12 @@ The back end was built using **Node.js** and **Express.js** with a **MongoDB** d
    - Connected to external APIs (setlist.fm and bmfsdb-js-api) to pull song data.
    - Provided song metadata such as last played date and total play count.
 
-4. **Game Features**
-
-   - Real-time marking of played songs.
-   - Automatic detection and notification when a user achieves BINGO.
-
-5. **Validation & Error Handling**
+4. **Validation & Error Handling**
 
    - Input validation using **Celebrate/Joi**.
    - Centralized error handler for consistent API responses.
 
-6. **Security & Code Quality**
+5. **Security & Code Quality**
 
    - Enforced code standards with **ESLint**.
    - Secure password storage and token validation.
@@ -71,7 +65,6 @@ The back end was built using **Node.js** and **Express.js** with a **MongoDB** d
 - User authentication (signup/signin)
 - CRUD operations for BINGO cards and song entries
 - Historical song recommendations via external API integration
-- Real-time game state updates and BINGO notifications
 - Secure password handling and route protection
 - Robust input validation and error management
 
@@ -91,41 +84,50 @@ The back end was built using **Node.js** and **Express.js** with a **MongoDB** d
 
 ## Example API Responses
 
-### POST /signup (User Registration)
+### POST /api/users/register (User Registration)
 
 ```json
 {
-  "_id": "64f8a3c5b3e1d2a5c1234567",
-  "name": "GoatFan123",
-  "email": "fan@example.com",
-  "token": "eyJhbGciOiJIUzI1NiIsInR..."
+  "success": true,
+  "data": {
+    "user": {
+      "_id": "64f8a3c5b3e1d2a5c1234567",
+      "name": "GoatFan123",
+      "email": "fan@example.com"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR..."
+  },
+  "message": "User registered successfully"
 }
 ```
 
-### GET /bingo-cards (Retrieve User’s BINGO Cards)
-
-```json
-[
-  {
-    "_id": "64f8a4d7b3e1d2a5c1234568",
-    "userId": "64f8a3c5b3e1d2a5c1234567",
-    "songs": [
-      { "title": "Turmoil & Tinfoil", "locked": true },
-      { "title": "Rocket Girl", "locked": false },
-      { "title": "Meet Me at the Creek", "locked": true }
-    ],
-    "createdAt": "2025-08-08T14:23:00.000Z"
-  }
-]
-```
-
-### POST /bingo-cards/:id/mark (Mark Song as Played)
+### GET /api/setlists/billy-strings/songs (Retrieve Songs)
 
 ```json
 {
-  "bingoCardId": "64f8a4d7b3e1d2a5c1234568",
-  "markedSongs": ["Turmoil & Tinfoil", "Meet Me at the Creek"],
-  "bingo": true
+  "success": true,
+  "message": "Songs retrieved successfully",
+  "data": {
+    "songs": [...],
+    "metadata": {...}
+  }
+}
+```
+
+### POST /api/bingo-cards (Create a BINGO Card)
+
+```json
+{
+  "success": true,
+  "message": "Bingo card created successfully",
+  "data": {
+    "_id": "66a1d8b2f1b9a7c3d5e9",
+    "name": "Card Name",
+    "squares": [...],
+    "userId": "...",
+    "createdAt": "...",
+    "updatedAt": "..."
+  }
 }
 ```
 
@@ -133,12 +135,13 @@ The back end was built using **Node.js** and **Express.js** with a **MongoDB** d
 
 ## Conclusion
 
-The Billy BINGO back end provides a robust foundation for a unique, interactive concert experience by securely managing users, integrating historical song data, and enabling real-time gameplay features.
+The Billy BINGO back end provides a robust foundation for a unique, interactive concert experience by securely managing users and integrating historical song data.
 
 ---
 
 ## Future Improvements
 
+- **Game Features:** Implement real-time marking of played songs and automatic BINGO detection/notifications.
 - **User Archive:** Allow fans to save and revisit past BINGO cards as digital memorabilia.
 - **Social Sharing:** Enable users to compare cards and share BINGO wins with friends.
 - **Mobile Optimization:** Enhance API support for mobile-first front-end features.
