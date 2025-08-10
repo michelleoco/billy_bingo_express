@@ -72,13 +72,14 @@ The back end was built using **Node.js** and **Express.js** with a **MongoDB** d
 
 ## Technologies
 
-- **Express.js** – Web application framework
-- **MongoDB** – Database management
-- **Node.js** – Runtime environment
-- **JSON Web Tokens (JWT)** – User authorization
-- **Bcrypt** – Password hashing
-- **Celebrate/Joi** – Request validation
-- **ESLint** – Code style enforcement
+- **Node.js** – Server-side JavaScript runtime
+- **Express.js** – Handles routing and API endpoints
+- **MongoDB** – Stores application data
+- **Mongoose** – Models and queries MongoDB data
+- **JSON Web Tokens (JWT)** – Manages user authentication
+- **Bcrypt** – Hashes and secures passwords
+- **CORS** – Enables cross-origin requests
+- **ESLint** – Enforces consistent code style
 
 ---
 
@@ -160,8 +161,32 @@ The Billy BINGO back end provides a robust foundation for a unique, interactive 
 **Installation:**
 
 ```bash
-git clone https://github.com/your-username/billy-bingo-backend.git
-cd billy-bingo-backend
+git clone https://github.com/michelleoco/billy_bingo_express.git
+cd billy_bingo_express
 npm install
+
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your configuration
+
+# Start development server
+npm run dev
+
+# Start production server
 npm start
+```
+
+## Environment Variables
+
+Create a `.env` file in the root directory:
+
+```bash
+# Database
+DATABASE_URL=mongodb://localhost:27017/billy_bingo
+
+# JWT Secret (generate a secure random string)
+JWT_SECRET=your_jwt_secret_here
+
+# Server Port (optional, defaults to 3001)
+PORT=3001
 ```
