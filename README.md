@@ -175,18 +175,3 @@ npm run dev
 # Start production server
 npm start
 ```
-
-## Environment Variables
-
-Create a `.env` file in the root directory:
-
-```bash
-# Database
-DATABASE_URL=mongodb://localhost:27017/billy_bingo
-
-# JWT Secret (generate a secure random string)
-JWT_SECRET=your_jwt_secret_here
-
-# Server Port (optional, defaults to 3001)
-PORT=3001
-```
